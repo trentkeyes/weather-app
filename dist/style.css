@@ -1,6 +1,48 @@
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
+
+.container {
+    display: grid;
+    grid-template-areas: 
+    "search forecast"
+    "current forecast"
+    "footer footer";
+    /* justify-content: center;
+    align-items: center; */
+    grid-template-columns: auto auto;
+    height: 100vh;
+    width: 100%;
+    background-image: url("./images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg");
+    background-size: cover;
+}
+
+.searchToggle {
+    grid-area: search;
+}
+
+.currentWeather {
+    grid-area: current;
+}
+
+.forecastWeather {
+    grid-area: forecast;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+input::placeholder {
+    opacity: 1;
+  }
+
