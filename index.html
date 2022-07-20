@@ -5,16 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Weather</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
     <div class="container">
-        <input type="text" id="search">
-        <button id="searchBtn">Search</button>
-    </div>
+        <div class="searchToggle">
+            <div class="searchBox">
+                <input type="text" id="search" placeholder="Search location...">
+                <button id="searchBtn">Search Location...</button>
+            </div>
 
+            <button>Display °F</button>
+
+        </div>
+        <div class="currentWeather">
+            <p class="temp" id="temp"></p>
+            <p class="desc" id="desc"></p>
+            <p class="city" id="city"></p>
+            <p class="time" id="date"></p>
+            <p class="time" id="time"></p>
+            <img src="" alt="" class="icon" id="currentIcon">
+            <p class="info" id="feelsLike">Feels Like</p>
+            <p class="info" id="humidity">Humidity</p>
+            <p class="info" id="windSpeed">Wind Speed</p>
+        </div>
+        <div class="forecastWeather">
+            <div class="dayForecast">
+                <p class="day" id="day1">Wednesday</p>
+                <p class="forecastHighLow" id="high1"></p>
+                <p class="forecastHighLow" id="low1"></p>
+                <img src="" alt="" class="forecastIcon" id="day1Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day2">Wednesday</p>
+                <p class="forecastHighLow" id="high2"></p>
+                <p class="forecastHighLow" id="low2"></p>
+                <img src="" alt="" class="forecastIcon" id="day2Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day3">Wednesday</p>
+                <p class="forecastHighLow" id="high3"></p>
+                <p class="forecastHighLow" id="low3"></p>
+                <img src="" alt="" class="forecastIcon" id="day3Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day4">Wednesday</p>
+                <p class="forecastHighLow" id="high4"></p>
+                <p class="forecastHighLow" id="low4"></p>
+                <img src="" alt="" class="forecastIcon" id="day4Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day5">Wednesday</p>
+                <p class="forecastHighLow" id="high5"></p>
+                <p class="forecastHighLow" id="low5"></p>
+                <img src="" alt="" class="forecastIcon" id="day5Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day6">Wednesday</p>
+                <p class="forecastHighLow" id="high6"></p>
+                <p class="forecastHighLow" id="low6"></p>
+                <img src="" alt="" class="forecastIcon" id="day6Icon">
+            </div>
+            <div class="dayForecast">
+                <p class="day" id="day7">Wednesday</p>
+                <p class="forecastHighLow" id="high7"></p>
+                <p class="forecastHighLow" id="low7"></p>
+                <img src="" alt="" class="forecastIcon" id="day7Icon">
+            </div>
+        </div>
+        <footer class="footer">
+            <p>Trent Keyes 2022</p><a href="https://github.com/trentkeyes"><img src="./images/GitHub-Mark-32px.png"
+                    alt="Github logo"></a><span>Image courtesy <a href="https://unsplash.com/@wirhabenzeit">Dominik
+                    Schröder</a></span>
+        </footer>
+    </div>
     <script src="main.js"></script>
 </body>
 
