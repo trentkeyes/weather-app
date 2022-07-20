@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import { fromUnixTime } from 'date-fns';
 
 const searchInput = document.getElementById('search');
@@ -13,58 +14,50 @@ const getLatLon = async (input) => {
   return [lat, lon];
 };
 
-const getCurrentWeather = async (location) => {
+const getWeather = async (location) => {
   const [lat, lon] = location;
   const weatherResponse = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=5a5e3111582419d8b091603e36061930&units=metric`,
+    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=5a5e3111582419d8b091603e36061930&units=metric`,
     { mode: 'cors' }
   );
   const weatherData = await weatherResponse.json();
   return weatherData;
 };
 
-const getForecastWeather = async (location) => {
-  const [lat, lon] = location;
-  const forecastResponse = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=5a5e3111582419d8b091603e36061930&units=metric`,
-    { mode: 'cors' }
-  );
-  const forecastData = await forecastResponse.json();
-  return forecastData;
-};
+const adjustedForTimezone = (shiftedUnixTime) =>
+  fromUnixTime(shiftedUnixTime).toUTCString().replace(' GMT', '');
 
 const processWeatherData = async () => {
   const city = searchInput.value;
   const [lat, lon] = await getLatLon(city);
-  const [currentWeatherData, forecastWeatherData] = await Promise.all([
-    getCurrentWeather([lat, lon]),
-    getForecastWeather([lat, lon]),
-  ]).then((data) => data);
+  const weatherData = await getWeather([lat, lon]);
 
-  console.log(currentWeatherData);
-  console.log(forecastWeatherData);
+  const [userUnixTime, shiftFromUTC] = [
+    weatherData.current.dt,
+    weatherData.timezone_offset,
+  ];
 
-  const currentWeather = {
-    main: currentWeatherData.weather[0].main,
-    description: currentWeatherData.weather[0].description,
-    temp: currentWeatherData.main.temp,
-    tempMin: currentWeatherData.main.temp_min,
-    tempMax: currentWeatherData.main.temp_max,
-    feelsLike: currentWeatherData.main.feels_like,
-    humidity: currentWeatherData.main.humidity,
-    windSpeed: currentWeatherData.wind.speed,
-    time: fromUnixTime(currentWeatherData.dt + currentWeatherData.timezone)
-      .toUTCString()
-      .replace('GMT', ''),
-    timezone: currentWeatherData.timezone,
+  const weather = {
+    main: weatherData.current.weather[0].main,
+    description: weatherData.current.weather[0].description,
+    temp: weatherData.current.temp,
+    feelsLike: weatherData.current.feels_like,
+    humidity: weatherData.current.humidity,
+    windSpeed: weatherData.current.wind_speed,
+    time: adjustedForTimezone(userUnixTime + shiftFromUTC),
+    tempMin: weatherData.daily[0].temp.min,
+    tempMax: weatherData.daily[0].temp.max,
+    dailyForecasts: weatherData.daily,
   };
 
-  console.log(currentWeather);
-  console.log(`Local time: ${currentWeather.time}`);
+  console.log(weather);
+  console.log(`Local time: ${weather.time}`);
 
-  const forecastWeather = {};
-
-  return [currentWeather, forecastWeather];
+  return weather;
 };
+
+// const renderWeatherData = () => {
+//   //
+// };
 
 searchBtn.addEventListener('click', processWeatherData);
