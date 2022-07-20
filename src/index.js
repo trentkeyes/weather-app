@@ -34,8 +34,8 @@ const getForecastWeather = async (location) => {
 };
 
 const processWeatherData = async () => {
-  const input = searchInput.value;
-  const [lat, lon] = await getLatLon(input);
+  const city = searchInput.value;
+  const [lat, lon] = await getLatLon(city);
   const [currentWeatherData, forecastWeatherData] = await Promise.all([
     getCurrentWeather([lat, lon]),
     getForecastWeather([lat, lon]),
@@ -53,11 +53,14 @@ const processWeatherData = async () => {
     feelsLike: currentWeatherData.main.feels_like,
     humidity: currentWeatherData.main.humidity,
     windSpeed: currentWeatherData.wind.speed,
-    time: fromUnixTime(currentWeatherData.dt),
+    time: fromUnixTime(currentWeatherData.dt + currentWeatherData.timezone)
+      .toUTCString()
+      .replace('GMT', ''),
+    timezone: currentWeatherData.timezone,
   };
+
   console.log(currentWeather);
-  console.log(`Feels like ${currentWeather.feelsLike}`);
-  console.log(`Time: ${currentWeather.time}`);
+  console.log(`Local time: ${currentWeather.time}`);
 
   const forecastWeather = {};
 
