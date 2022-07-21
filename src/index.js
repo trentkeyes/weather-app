@@ -39,26 +39,27 @@ const processWeatherData = async (city) => {
     weatherData.current.dt,
     weatherData.timezone_offset,
   ];
-
+  const dateTime = adjustedForTimezone(userUnixTime + shiftFromUTC);
+  const date = dateTime.substring(0, 16);
+  const time = dateTime.substring(17, 22);
+  const descLower = weatherData.current.weather[0].description;
+  const description = descLower[0].toUpperCase() + descLower.substring(1);
+  const temp = Math.round(weatherData.current.temp);
+  const feelsLike = Math.round(weatherData.current.temp);
+  const windSpeed = Math.round(weatherData.current.temp);
   const weather = {
-    main: weatherData.current.weather[0].main,
-    description: weatherData.current.weather[0].description,
-    temp: weatherData.current.temp,
-    feelsLike: weatherData.current.feels_like,
+    description,
+    temp,
+    feelsLike,
     humidity: weatherData.current.humidity,
-    windSpeed: weatherData.current.wind_speed,
-    time: adjustedForTimezone(userUnixTime + shiftFromUTC),
-    tempMin: weatherData.daily[0].temp.min,
-    tempMax: weatherData.daily[0].temp.max,
+    windSpeed,
+    city,
+    time,
+    date,
     dailyForecasts: weatherData.daily,
   };
-  //format and split up date and time
-  // add city
-  //icon
-  //round decimals with Math.round(0.9)
-
-  console.log(weather);
-  console.log(`Local time: ${weather.time}`);
+  //add icon
+  // add error handlers
   return weather;
 };
 
@@ -82,16 +83,14 @@ const addWeatherData = (data) => {
   const humidity = document.getElementById('humidity');
   const windSpeed = document.getElementById('windSpeed');
 
+  city.textContent = data.city;
   temp.textContent = `${data.temp} °${tempUnit}`;
   desc.textContent = data.description;
-  //city.textContent = data.city
-  date.textContent = data.time;
+  date.textContent = data.date;
   time.textContent = data.time;
   feelsLike.textContent = `Feels Like: ${data.feelsLike} °${tempUnit}`;
-  humidity.textContent = `Humidity: ${data.humidity}`;
+  humidity.textContent = `Humidity: ${data.humidity}%`;
   windSpeed.textContent = `Wind Speed: ${data.windSpeed} ${speedUnit}`;
-  console.log('test');
-  console.log(data);
 };
 
 const displayWeatherData = async (city) => {
@@ -120,4 +119,6 @@ const toggleUnits = () => {
 searchBtn.addEventListener('click', inputWeatherData);
 unitToggle.addEventListener('click', toggleUnits);
 
-displayWeatherData('Lisbon');
+//add the ability to search when user hits enter
+
+displayWeatherData('Hell');
