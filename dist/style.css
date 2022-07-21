@@ -8,41 +8,79 @@
 .container {
     display: grid;
     grid-template-areas: 
-    "search forecast"
+    "search search"
     "current forecast"
     "footer footer";
     /* justify-content: center;
     align-items: center; */
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     height: 100vh;
     width: 100%;
+
     background-image: url("./images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg");
     background-size: cover;
 }
 
 .searchToggle {
     grid-area: search;
+    padding: 30px;
 }
 
 .currentWeather {
     grid-area: current;
+    padding-left: 30px;
+}
+
+.currentWeather p {
+    padding-top: 10px;
 }
 
 .forecastWeather {
     grid-area: forecast;
+    padding: 30px;
+    display: flex;
 }
 
 .footer {
     grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 2px black;
+    max-width: fit-content;
+    margin-bottom: 10px;
 }
 
 input {
     background-color: transparent;
     border: none;
     outline: none;
+    max-width: 140px;
 }
 
 input::placeholder {
     opacity: 1;
   }
 
+.searchBtn, .unitToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.temp {
+    font-size: 40px;
+}
+
+.credit {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
