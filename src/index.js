@@ -58,8 +58,6 @@ const processWeatherData = async (city) => {
     date,
     dailyForecasts: weatherData.daily,
   };
-  //add icon
-  // add error handlers
   return weather;
 };
 
@@ -73,7 +71,6 @@ const addWeatherData = (data) => {
     tempUnit = 'F';
     speedUnit = 'mp/h';
   }
-
   const temp = document.getElementById('temp');
   const desc = document.getElementById('desc');
   const city = document.getElementById('city');
@@ -93,9 +90,19 @@ const addWeatherData = (data) => {
   windSpeed.textContent = `Wind Speed: ${data.windSpeed} ${speedUnit}`;
 };
 
+const showContentHideSpinners = () => {
+  const loading = document.querySelectorAll('.loading');
+  const currentWeather = document.querySelector('.currentWeather');
+  const forecastWeather = document.querySelectorAll('.dayForecast');
+  loading.forEach((element) => element.classList.add('hidden'));
+  currentWeather.classList.remove('hidden');
+  forecastWeather.forEach((element) => element.classList.remove('hidden'));
+};
+
 const displayWeatherData = async (city) => {
   const data = await processWeatherData(city);
   addWeatherData(data);
+  showContentHideSpinners();
 };
 
 const inputWeatherData = async () => {
@@ -119,6 +126,13 @@ const toggleUnits = () => {
 searchBtn.addEventListener('click', inputWeatherData);
 unitToggle.addEventListener('click', toggleUnits);
 
-//add the ability to search when user hits enter
+// add icon
+// add error handlers
+
+// add the ability to search when user hits enter
+
+// add min width to daily divs
+
+// add error message for bad input
 
 displayWeatherData('Hell');
