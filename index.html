@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -17,11 +19,13 @@
     <div class="container">
         <div class="searchToggle">
             <div class="searchBox">
-                <input type="text" id="search" placeholder="Search location...">
-                <button id="searchBtn">Search Location...</button>
+                <input type="text" id="search" placeholder="Search location">
+                <button class="searchBtn" id="searchBtn"><span class="material-symbols-outlined">
+                        search
+                    </span></button>
             </div>
 
-            <button>Display °F</button>
+            <button class="unitToggle" id="unitToggle">Display °F</button>
 
         </div>
         <div class="currentWeather">
@@ -80,8 +84,11 @@
             </div>
         </div>
         <footer class="footer">
-            <p>Trent Keyes 2022</p><a href="https://github.com/trentkeyes"><img src="./images/GitHub-Mark-32px.png"
-                    alt="Github logo"></a><span>Image courtesy <a href="https://unsplash.com/@wirhabenzeit">Dominik
+            <div class="credit">
+                <span>Trent Keyes 2022</span><a href="https://github.com/trentkeyes"><img
+                        src="./images/GitHub-Mark-32px.png" alt="Github logo"></a>
+            </div>
+            <span>Image by <a href="https://unsplash.com/@wirhabenzeit">Dominik
                     Schröder</a></span>
         </footer>
     </div>
