@@ -7,17 +7,16 @@
 
 .container {
     display: grid;
-    grid-template-areas: 
-    "search search"
-    "current forecast"
-    "footer footer";
+    grid-template-areas:
+        "search search"
+        "current forecast"
+        "footer footer";
     /* justify-content: center;
     align-items: center; */
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
     width: 100%;
-
     background-image: url("./images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg");
     background-size: cover;
 }
@@ -31,18 +30,21 @@
     grid-area: current;
     padding-left: 30px;
     padding-top: 10px;
+    position: relative;
+    min-width: 200px;
 }
 
-.currentWeather p {
-    
-
-    
-}
+.currentWeather p {}
 
 .forecastWeather {
     grid-area: forecast;
-    padding: 30px;
+    position: relative;
     display: flex;
+
+}
+
+.dayForecast {
+    position: relative;
 }
 
 .footer {
@@ -70,9 +72,10 @@ input {
 
 input::placeholder {
     opacity: 1;
-  }
+}
 
-.searchBtn, .unitToggle {
+.searchBtn,
+.unitToggle {
     background: none;
     border: none;
     cursor: pointer;
@@ -107,4 +110,40 @@ a:link {
 
 a:visited {
     color: black;
-  }
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+}
+
+.loading:after {
+    content: "";
+    width: 50px;
+    height: 50px;
+    border: 10px solid transparent;
+    border-top-color: #73b3db;
+    border-bottom-color: #73b3db;
+    border-radius: 50%;
+    animation: loading .8s linear infinite;
+    
+}
+
+.loading.forecast {
+    top: 50%;
+}
+
+@keyframes loading {
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
