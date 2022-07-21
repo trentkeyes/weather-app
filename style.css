@@ -24,16 +24,19 @@
 
 .searchToggle {
     grid-area: search;
-    padding: 30px;
+    padding: 30px 0px 0px 30px;
 }
 
 .currentWeather {
     grid-area: current;
     padding-left: 30px;
+    padding-top: 10px;
 }
 
 .currentWeather p {
-    padding-top: 10px;
+    
+
+    
 }
 
 .forecastWeather {
@@ -75,12 +78,33 @@ input::placeholder {
     cursor: pointer;
 }
 
+.city {
+    font-size: 30px;
+}
+
+.time {
+    font-size: 14px;
+}
+
 .temp {
     font-size: 40px;
+}
+
+.desc {
+    font-size: 30px;
+    line-height: .7;
 }
 
 .credit {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+  }
