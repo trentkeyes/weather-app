@@ -9,13 +9,17 @@ let unitSystem = 'metric';
 let activeCity = 'Hell';
 
 const getLatLon = async (input) => {
-  const latLonResponse = await fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=5a5e3111582419d8b091603e36061930`,
-    { mode: 'cors' }
-  );
-  const latLonData = await latLonResponse.json();
-  const [lat, lon] = [latLonData[0].lat, latLonData[0].lon];
-  return [lat, lon];
+  try {
+    const latLonResponse = await fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=5a5e3111582419d8b091603e36061930`,
+      { mode: 'cors' }
+    );
+    const latLonData = await latLonResponse.json();
+    const [lat, lon] = [latLonData[0].lat, latLonData[0].lon];
+    return [lat, lon];
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const getWeather = async (location) => {
@@ -32,6 +36,7 @@ const adjustedForTimezone = (shiftedUnixTime) =>
   fromUnixTime(shiftedUnixTime).toUTCString().replace(' GMT', '');
 
 const formatData = (data) => {
+  const city = data.city[0].toUpperCase() + data.city.substring(1);
   const shiftFromUTC = data.timezone_offset;
   const userUnixTime = data.current.dt;
   const currentDateTime = adjustedForTimezone(userUnixTime + shiftFromUTC);
@@ -79,7 +84,7 @@ const formatData = (data) => {
     feelsLike,
     humidity: data.current.humidity,
     windSpeed,
-    city: data.city,
+    city,
     time,
     date,
     currentIcon,
@@ -203,10 +208,17 @@ const addWeatherData = (data) => {
   day7Icon.src = `http://openweathermap.org/img/wn/${data.day7Icon}@2x.png`;
 };
 
-const showContentHideSpinners = () => {
-  const loading = document.querySelectorAll('.loading');
-  const currentWeather = document.querySelector('.currentWeather');
-  const forecastWeather = document.querySelectorAll('.dayForecast');
+const loading = document.querySelectorAll('.loading');
+const currentWeather = document.querySelector('.currentWeather');
+const forecastWeather = document.querySelectorAll('.dayForecast');
+
+const showSpinners = () => {
+  currentWeather.classList.add('hidden');
+  forecastWeather.forEach((element) => element.classList.add('hidden'));
+  loading.forEach((element) => element.classList.remove('hidden'));
+};
+
+const showContent = () => {
   loading.forEach((element) => element.classList.add('hidden'));
   currentWeather.classList.remove('hidden');
   forecastWeather.forEach((element) => element.classList.remove('hidden'));
@@ -215,13 +227,14 @@ const showContentHideSpinners = () => {
 const displayWeatherData = async (city) => {
   const data = await processWeatherData(city);
   addWeatherData(data);
-  showContentHideSpinners();
+  showContent();
 };
 
 const inputWeatherData = async () => {
   const city = searchInput.value;
   activeCity = city;
   searchInput.value = '';
+  showSpinners();
   displayWeatherData(city);
 };
 
@@ -233,18 +246,20 @@ const toggleUnits = () => {
     unitSystem = 'metric';
     unitToggle.textContent = 'Display °F';
   }
+  showSpinners();
   displayWeatherData(activeCity);
 };
 
+const inputWithEnterKey = (e) => {
+  if (e.key === 'Enter') {
+    inputWeatherData();
+  }
+};
+
+searchInput.addEventListener('keypress', inputWithEnterKey);
 searchBtn.addEventListener('click', inputWeatherData);
 unitToggle.addEventListener('click', toggleUnits);
 
-// add error handlers
-
-// add the ability to search when user hits enter
-
-// add min width to daily divs
-
-// add error message for bad input
+// add error message for city not in the database, server issue
 
 displayWeatherData('Hell');
