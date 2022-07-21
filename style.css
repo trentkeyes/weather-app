@@ -8,11 +8,11 @@
 .container {
     display: grid;
     grid-template-areas:
-        "search search"
-        "current forecast"
-        "footer footer";
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+        "search"
+        "current"
+        "forecast"
+        "footer";
+    grid-template-rows: auto auto 1fr auto;
     height: 100vh;
     width: 100%;
     background-image: url("./images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg");
@@ -24,12 +24,17 @@
     padding: 30px 0px 0px 30px;
 }
 
-.currentWeather {
+.currentWeatherContainer {
     grid-area: current;
+    display: flex;
+}
+
+.currentWeather {
     padding-left: 30px;
     padding-top: 10px;
     position: relative;
     min-width: 200px;
+    min-height: 284px;
 }
 
 .mainInfo {
@@ -37,19 +42,38 @@
     grid-template-areas: 
     'temp icon'
     'desc desc';
+    grid-template-columns: auto 1fr;
     align-items: center;
     margin-top: -10px;
 }
 
-.forecastWeather {
+.forecastContainer {
     grid-area: forecast;
+}
+
+.forecastWeather {
+    
     position: relative;
     display: flex;
+    padding-left: 30px;
+    padding-top: 30px;
 }
 
 .dayForecast {
+    display: flex;
     position: relative;
     min-width: 100px;
+    min-height: 100px;
+    flex-direction: column;
+    align-items: center;
+    background-color: #73b3db3d;
+    margin-right: 5px;
+    padding: 15px 0px 0px 0px;
+    border-radius: 2px;
+}
+
+.dayForecast:last-child {
+    margin-right: 0px;
 }
 
 .footer {
@@ -112,6 +136,15 @@ input::placeholder {
     max-width: 80px;
 }
 
+.dayForecast p {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.dayForecast img {
+    margin-top: -15px;
+}
+
 .credit {
     display: flex;
     align-items: center;
@@ -130,7 +163,7 @@ a:visited {
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     visibility: visible;
@@ -150,6 +183,8 @@ a:visited {
 
 .loading.forecast {
     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @keyframes loading {
