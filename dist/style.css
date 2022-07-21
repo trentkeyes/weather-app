@@ -11,8 +11,6 @@
         "search search"
         "current forecast"
         "footer footer";
-    /* justify-content: center;
-    align-items: center; */
     grid-template-columns: auto 1fr;
     grid-template-rows: auto 1fr auto;
     height: 100vh;
@@ -34,17 +32,24 @@
     min-width: 200px;
 }
 
-.currentWeather p {}
+.mainInfo {
+    display: grid;
+    grid-template-areas: 
+    'temp icon'
+    'desc desc';
+    align-items: center;
+    margin-top: -10px;
+}
 
 .forecastWeather {
     grid-area: forecast;
     position: relative;
     display: flex;
-
 }
 
 .dayForecast {
     position: relative;
+    min-width: 100px;
 }
 
 .footer {
@@ -52,7 +57,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px;
+    gap: 20px;
+    padding: 0px 30px;
 }
 
 .searchBox {
@@ -90,12 +96,20 @@ input::placeholder {
 }
 
 .temp {
+    grid-area: temp;
     font-size: 40px;
 }
 
 .desc {
+    grid-area: desc;
     font-size: 30px;
-    line-height: .7;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.mainInfo .icon {
+    grid-area: icon;
+    max-width: 80px;
 }
 
 .credit {
