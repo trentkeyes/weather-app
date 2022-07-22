@@ -13,6 +13,7 @@ User can find the current weather conditions and seven day forecast of any city 
 
 - Get up-to-date weather information with corresponding icons, local date and time from around the world.
 - Toggle between metric and imperial units.
+- Loading spinners while data loads.
 - Search with button or enter key.
 
 ### Features to add
