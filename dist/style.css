@@ -197,3 +197,15 @@ a:visited {
 .hidden {
     visibility: hidden;
 }
+
+@media only screen and (max-width: 768px) {
+    .dayForecast {
+        margin: 5px;
+    }
+    .container {
+        height: 100%;
+    }
+    .footer {
+        margin-top: 10px;
+    }
+  }

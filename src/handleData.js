@@ -5,7 +5,7 @@ import { getUnitSystem } from './index';
 const getLatLon = async (input) => {
   try {
     const latLonResponse = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=5a5e3111582419d8b091603e36061930`,
+      `https://api.openweathermap.org/geo/1.0/direct?q=${input}&appid=5a5e3111582419d8b091603e36061930`,
       { mode: 'cors' }
     );
     const latLonData = await latLonResponse.json();
