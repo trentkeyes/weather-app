@@ -4,8 +4,7 @@
 
 [Live app](https://trentkeyes.github.io/weather-app/)
 
-Inpsired by the [the Odin Project curriculum](https://www.theodinproject.com/courses/javascript/lessons/weather-app). Created with HTML, CSS and Javascript.
-Background photo by [Dominik Schröder](https://unsplash.com/@wirhabenzeit).
+Inpsired by the [the Odin Project curriculum](https://www.theodinproject.com/lessons/node-path-javascript-weather-app). Created with HTML, CSS and Javascript. Background photo by [Dominik Schröder](https://unsplash.com/@wirhabenzeit).
 
 User can find the current weather conditions and seven day forecast of any city listed in the [OpenWeather API](https://openweathermap.org/).
 
