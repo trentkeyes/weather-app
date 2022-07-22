@@ -10,7 +10,7 @@ export function setUnitSystem(unit) {
   unitSystem = unit;
 }
 
-let activeCity = 'Hell';
+let activeCity = 'Querétaro';
 export function getActiveCity() {
   return activeCity;
 }
@@ -18,6 +18,7 @@ export function setActiveCity(city) {
   activeCity = city;
 }
 
-displayWeatherData('Hell');
+displayWeatherData('Querétaro');
 
 // add error message for city not in the database, server issue
+// 870

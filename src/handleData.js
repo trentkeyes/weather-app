@@ -41,9 +41,10 @@ const formatData = (data) => {
   const descLower = data.current.weather[0].description;
   const description = descLower[0].toUpperCase() + descLower.substring(1);
   const temp = Math.round(data.current.temp);
-  const feelsLike = Math.round(data.current.temp);
-  const windSpeed = Math.round(data.current.temp);
+  const feelsLike = Math.round(data.current.feels_like);
+  const windSpeed = Math.round(data.current.wind_speed);
   const currentIcon = data.current.weather[0].icon;
+  console.log(data.current);
 
   const day1Unix = data.daily[1].dt;
   const day2Unix = data.daily[2].dt;
